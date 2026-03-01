@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <script>
+      (function() {
+        var k = 'gestao-financeira-theme';
+        var s = typeof localStorage !== 'undefined' && localStorage.getItem(k);
+        var dark = s === 'dark' || (!s && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Controla as tuas finanças em Euro. Regista receitas e despesas por categoria, consulta relatórios mensais e mantém o saldo sempre à mão." />
+    <meta name="theme-color" content="#059669" />
+    <!-- Open Graph / partilha em redes sociais -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Gestão Financeira" />
+    <meta property="og:description" content="Regista receitas e despesas por categoria. Relatórios mensais e saldo em tempo real." />
+    <title>Gestão Financeira</title>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root" role="application"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

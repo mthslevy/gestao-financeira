@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/* Dark mode: ativar com classe .dark no <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ===== Design system: variáveis CSS ===== */
+:root {
+  font-family: "DM Sans", system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Cores base (light) */
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-bg: #f8fafc;
+  --color-primary: #059669;
+  --color-primary-hover: #047857;
+  --color-primary-soft: #d1fae5;
+  --color-danger: #be123c;
+  --color-danger-soft: #ffe4e6;
+  --color-border: #e2e8f0;
+
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+.dark {
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-bg: #0f172a;
+  --color-primary: #34d399;
+  --color-primary-hover: #6ee7b7;
+  --color-primary-soft: #064e3b;
+  --color-danger: #f87171;
+  --color-danger-soft: #450a0a;
+  --color-border: #334155;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ===== Interatividade e acessibilidade ===== */
+button,
+[role="button"],
+a[href] {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Foco visível (navegação por teclado) */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Respeitar preferência de menos animação */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Formulários: sempre interativos */
+form,
+input,
+select,
+label {
+  pointer-events: auto;
+}
+
+/* Animação de flutuação suave para os blobs (respeitada por prefers-reduced-motion) */
+@keyframes float {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -20px); }
+  100% { transform: translate(0, 0); }
+}
+
+.animate-blob {
+  animation: float 20s infinite ease-in-out;
+}
+
+/* Tema Tailwind (cores do design system) */
+@theme {
+  --color-emerald-soft: #d1fae5;
+  --color-rose-soft: #ffe4e6;
+  --color-slate-paper: #f1f5f9;
+}
