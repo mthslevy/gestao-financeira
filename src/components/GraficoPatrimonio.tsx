@@ -8,7 +8,6 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts'
-import type { TooltipProps } from 'recharts'
 import { useTheme } from '../contexts/ThemeContext'
 import type { Transaction } from '../domain/types'
 
@@ -82,7 +81,13 @@ function processarDadosParaGrafico(transacoes: Transaction[]): PontoGrafico[] {
   })
 }
 
-function CustomTooltip({ active, payload, label }: TooltipProps<number, string>) {
+interface CustomTooltipProps {
+  active?: boolean
+  payload?: Array<{ value?: number }>
+  label?: string
+}
+
+function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   if (!active || !payload?.length) return null
 
   const valor = payload[0].value as number

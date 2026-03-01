@@ -62,7 +62,7 @@ export function TransactionList({
         hidden: {},
       }}
     >
-      {list.map((tx, index) => {
+      {list.map((tx) => {
         const isEditing = editingId === tx.id
         return (
           <motion.li
