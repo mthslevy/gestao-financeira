@@ -3,10 +3,11 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim() ?? ''
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() ?? ''
 
-const misconfigured =
-  !supabaseUrl ||
-  !supabaseAnonKey ||
-  supabaseUrl.includes('seu-projeto')
+export const isSupabaseConfigured = Boolean(
+  supabaseUrl && supabaseAnonKey && !supabaseUrl.includes('seu-projeto')
+)
+
+const misconfigured = !isSupabaseConfigured
 
 if (misconfigured) {
   console.error(

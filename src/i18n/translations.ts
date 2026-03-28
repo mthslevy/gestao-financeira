@@ -83,6 +83,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     loginEmailNotConfirmed: 'Erro: Precisas de confirmar o teu e-mail primeiro!',
     loginGenericError: 'Email ou palavra-passe incorretos. Tenta de novo.',
     signUpGenericError: 'Não foi possível criar a conta. Verifica os dados e tenta de novo.',
+    supabaseConfigBanner:
+      'O servidor Supabase não está configurado: cria um ficheiro .env na raiz do projeto com VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY (copia .env.example) e reinicia npm run dev.',
     reportTitle: 'Relatório mensal',
     reportInflows: 'Entradas',
     reportOutflows: 'Saídas',
@@ -189,6 +191,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     loginEmailNotConfirmed: 'Error: You need to confirm your email first!',
     loginGenericError: 'Incorrect email or password. Please try again.',
     signUpGenericError: 'Could not create the account. Check your details and try again.',
+    supabaseConfigBanner:
+      'Supabase is not configured: create a .env file in the project root with VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY (see .env.example) and restart npm run dev.',
     reportTitle: 'Monthly report',
     reportInflows: 'Inflows',
     reportOutflows: 'Outflows',
@@ -295,6 +299,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     loginEmailNotConfirmed: 'Error: ¡Necesitas confirmar tu correo primero!',
     loginGenericError: 'Correo o contraseña incorrectos. Inténtalo de nuevo.',
     signUpGenericError: 'No se pudo crear la cuenta. Revisa los datos e inténtalo de nuevo.',
+    supabaseConfigBanner:
+      'Supabase no está configurado: crea un archivo .env en la raíz con VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY (copia .env.example) y reinicia npm run dev.',
     reportTitle: 'Informe mensual',
     reportInflows: 'Entradas',
     reportOutflows: 'Salidas',

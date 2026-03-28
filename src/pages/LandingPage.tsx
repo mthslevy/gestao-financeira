@@ -1,4 +1,5 @@
 import { Wallet, PieChart, Tags, TrendingUp, ArrowRight } from 'lucide-react'
+import { isSupabaseConfigured } from '../lib/supabase'
 import { useLanguage } from '../contexts/LanguageContext'
 import { LanguageSelector } from '../components/LanguageSelector'
 import { ThemeToggle } from '../components/ThemeToggle'
@@ -63,6 +64,14 @@ export function LandingPage({ onOpenLogin }: LandingPageProps) {
       </header>
 
       <main className="relative z-10 mx-auto max-w-5xl px-4 py-12 sm:py-20 sm:px-6">
+        {!isSupabaseConfigured && (
+          <div
+            role="alert"
+            className="mb-8 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-left text-sm text-amber-900 dark:border-amber-800/80 dark:bg-amber-950/40 dark:text-amber-100"
+          >
+            {t('supabaseConfigBanner')}
+          </div>
+        )}
         <section className="text-center">
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:text-5xl dark:text-slate-50">
             {t('heroTitlePrefix')}

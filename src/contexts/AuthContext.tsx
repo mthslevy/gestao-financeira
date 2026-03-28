@@ -23,11 +23,35 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session: s } }) => {
-      setSession(s)
-      setUser(s?.user ?? null)
+    let cancelled = false
+    let loadingFinished = false
+
+    const finishLoading = () => {
+      if (cancelled || loadingFinished) return
+      loadingFinished = true
       setLoading(false)
-    })
+    }
+
+    const safetyTimer = window.setTimeout(() => {
+      if (!cancelled) finishLoading()
+    }, 15_000)
+
+    supabase.auth
+      .getSession()
+      .then(({ data: { session: s } }) => {
+        if (cancelled) return
+        setSession(s)
+        setUser(s?.user ?? null)
+      })
+      .catch(() => {
+        if (cancelled) return
+        setSession(null)
+        setUser(null)
+      })
+      .finally(() => {
+        window.clearTimeout(safetyTimer)
+        if (!cancelled) finishLoading()
+      })
 
     const {
       data: { subscription },
@@ -36,7 +60,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(s?.user ?? null)
     })
 
-    return () => subscription.unsubscribe()
+    return () => {
+      cancelled = true
+      window.clearTimeout(safetyTimer)
+      subscription.unsubscribe()
+    }
   }, [])
 
   const signIn = useCallback(async (email: string, password: string) => {
