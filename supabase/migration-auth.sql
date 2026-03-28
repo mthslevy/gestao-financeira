@@ -1,5 +1,6 @@
 -- Migração: adicionar autenticação por utilizador (user_id) e RLS
--- Executa no SQL Editor do Supabase DEPOIS do schema.sql base.
+-- Executa no SQL Editor do Supabase se ainda tens o schema ANTIGO (sem user_id / com políticas anon).
+-- Projetos novos: usa apenas supabase/schema.sql (já inclui user_id e RLS).
 -- Assim cada utilizador só vê as suas categorias e transações.
 --
 -- No Supabase: Authentication > Providers > Email deve estar ativado

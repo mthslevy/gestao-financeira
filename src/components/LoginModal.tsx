@@ -72,8 +72,10 @@ export function LoginModal({
       if (error) {
         if (mode === 'login' && error.message.toLowerCase().includes('email not confirmed')) {
           setMessage({ type: 'error', text: t('loginEmailNotConfirmed') })
+        } else if (mode === 'login') {
+          setMessage({ type: 'error', text: t('loginGenericError') })
         } else {
-          setMessage({ type: 'error', text: mode === 'login' ? t('loginErrorPrefix') + error.message : error.message })
+          setMessage({ type: 'error', text: t('signUpGenericError') })
         }
       } else {
         if (mode === 'signup') {

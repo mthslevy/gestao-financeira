@@ -1,22 +1,22 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim() ?? ''
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() ?? ''
 
-// Este bloco vai avisar-te se o .env falhar
-if (!supabaseUrl || supabaseUrl.includes('seu-projeto')) {
-  const msg =
-    "ALERTA: O site ainda está a tentar ligar a 'seu-projeto'. Verifica o ficheiro .env na RAIZ do projeto (não dentro de src) e reinicia o terminal (npm run dev)!"
-  console.error(msg)
-  if (typeof alert !== 'undefined') alert(msg)
+const misconfigured =
+  !supabaseUrl ||
+  !supabaseAnonKey ||
+  supabaseUrl.includes('seu-projeto')
+
+if (misconfigured) {
+  console.error(
+    '[Supabase] Configuração em falta ou inválida. Define VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY no .env na raiz e reinicia o servidor de desenvolvimento.'
+  )
 }
 
-// Para debug: no Console vês qual URL está a ser usada (sem expor a key)
-if (supabaseUrl && typeof console !== 'undefined') {
-  console.log(
-    '[Supabase] URL em uso:',
-    supabaseUrl.startsWith('http') ? supabaseUrl.replace(/https:\/\/([^.]+)\..*/, 'https://$1.supabase.co') : 'MISSING'
-  )
+if (import.meta.env.DEV && supabaseUrl && !misconfigured) {
+  const redacted = supabaseUrl.replace(/^https?:\/\/([^.]+).*/, '$1…(supabase)')
+  console.debug('[Supabase] URL:', redacted)
 }
 
 export const supabase = createClient(
